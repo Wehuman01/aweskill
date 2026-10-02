@@ -9,6 +9,7 @@ import {
   removeSkillFromBundle,
   writeBundle,
 } from "../src/lib/bundles.js";
+import { upsertSkillLockEntry } from "../src/lib/lock.js";
 import { getSkillPath } from "../src/lib/skills.js";
 import { createTempWorkspace, writeSkill } from "./helpers.js";
 
@@ -47,6 +48,30 @@ describe("bundles", () => {
 
     await expect(deleteBundle(workspace.homeDir, "backend")).resolves.toBe(true);
     await expect(listBundles(workspace.homeDir)).resolves.toEqual([]);
+  });
+
+  it("inherits the tracked source from skills-lock when adding a skill", async () => {
+    const workspace = await createTempWorkspace();
+    await writeSkill(getSkillPath(workspace.homeDir, "tracked"), "Tracked");
+    await writeSkill(getSkillPath(workspace.homeDir, "untracked"), "Untracked");
+    await upsertSkillLockEntry(workspace.homeDir, "tracked", {
+      source: "wehuman01/aweskill",
+      sourceType: "github",
+      sourceUrl: "https://github.com/wehuman01/aweskill.git",
+      computedHash: "deadbeef",
+    });
+
+    await createBundle(workspace.homeDir, "mixed");
+    await addSkillToBundle(workspace.homeDir, "mixed", "tracked");
+    await addSkillToBundle(workspace.homeDir, "mixed", "untracked");
+
+    await expect(readBundle(workspace.homeDir, "mixed")).resolves.toEqual({
+      name: "mixed",
+      skills: [
+        { name: "tracked", source: "wehuman01/aweskill" },
+        { name: "untracked", source: null },
+      ],
+    });
   });
 
   it("rejects adding unknown skills to a bundle", async () => {

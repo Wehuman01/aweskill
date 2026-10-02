@@ -5,6 +5,7 @@ import { parse, stringify } from "yaml";
 
 import type { BundleDefinition, BundleSkill } from "../types.js";
 import { pathExists } from "./fs.js";
+import { readSkillLock } from "./lock.js";
 import { getAweskillPaths, sanitizeName } from "./path.js";
 import { skillExists } from "./skills.js";
 
@@ -157,6 +158,18 @@ export async function createBundle(homeDir: string, bundleName: string): Promise
   return writeBundle(homeDir, { name: normalizedName, skills: [] });
 }
 
+/**
+ * A skill added by hand keeps its provenance: if skills-lock tracks where the
+ * skill came from, the bundle records that source so `template install` and
+ * `bundle show` can act on it. Local imports carry a path, not a shareable
+ * source, so they stay null.
+ */
+async function trackedSkillSource(homeDir: string, skillName: string): Promise<string | null> {
+  const lock = await readSkillLock(homeDir);
+  const entry = lock.skills[skillName];
+  return entry?.sourceType === "github" ? entry.source : null;
+}
+
 export async function addSkillToBundle(
   homeDir: string,
   bundleName: string,
@@ -170,7 +183,7 @@ export async function addSkillToBundle(
   const bundle = await readBundle(homeDir, bundleName);
   const nextSkills = bundle.skills.some((skill) => skill.name === normalizedSkill)
     ? bundle.skills
-    : [...bundle.skills, { name: normalizedSkill, source: null }];
+    : [...bundle.skills, { name: normalizedSkill, source: await trackedSkillSource(homeDir, normalizedSkill) }];
   bundle.skills = nextSkills.sort((left, right) => left.name.localeCompare(right.name));
   return writeBundle(homeDir, bundle);
 }
