@@ -15,6 +15,7 @@ describe("agents", () => {
     expect(ids.length).toBeGreaterThanOrEqual(48);
     expect(ids).toContain("claude-code");
     expect(ids).toContain("cursor");
+    expect(ids).toContain("zcode");
     expect(ids).toContain("zencoder");
     expect(ids).toEqual([...ids].sort());
   });
@@ -33,6 +34,8 @@ describe("agents", () => {
     expect(resolveAgentSkillsDir("workbuddy", "global", "/tmp/home")).toContain(`.workbuddy-ai${sep}skills`);
     expect(resolveAgentSkillsDir("mimo", "global", "/tmp/home")).toContain(`.config${sep}mimocode${sep}skills`);
     expect(resolveAgentSkillsDir("mimo", "project", "/tmp/project")).toContain(`.mimocode${sep}skills`);
+    expect(resolveAgentSkillsDir("zcode", "global", "/tmp/home")).toContain(`.zcode${sep}skills`);
+    expect(resolveAgentSkillsDir("zcode", "project", "/tmp/project")).toContain(`.zcode${sep}skills`);
   });
 
   it("detects installed agents from root directories", async () => {

@@ -511,7 +511,7 @@ skill 目录结构与设计原则见 [docs/DESIGN.md](docs/DESIGN.md)。
 
 当前支持的 agent：
 
-`adal`、`amp`、`antigravity`、`augment`、`bob`、`claude-code`、`cline`、`codebuddy`、`command-code`、`continue`、`codex`、`copilot`、`cortex`、`crush`、`cursor`、`deepagents`、`droid`、`firebender`、`gemini-cli`、`github-copilot`、`goose`、`iflow-cli`、`junie`、`kilo`、`kilo-code`、`kimi-cli`、`kiro-cli`、`kode`、`mcpjam`、`mistral-vibe`、`mux`、`neovate`、`openclaw`、`openclaude-ide`、`openhands`、`opencode`、`pi`、`pochi`、`qoder`、`qwen-code`、`replit`、`roo`、`trae`、`trae-cn`、`warp`、`windsurf`、`zencoder`
+`adal`、`amp`、`antigravity`、`augment`、`bob`、`claude-code`、`cline`、`codebuddy`、`command-code`、`continue`、`codex`、`copilot`、`cortex`、`crush`、`cursor`、`deepagents`、`droid`、`firebender`、`gemini-cli`、`github-copilot`、`goose`、`iflow-cli`、`junie`、`kilo`、`kilo-code`、`kimi-cli`、`kiro-cli`、`kode`、`mcpjam`、`mistral-vibe`、`mimo`、`mux`、`neovate`、`openclaw`、`openclaude-ide`、`openhands`、`opencode`、`pi`、`pochi`、`qoder`、`qwen-code`、`replit`、`roo`、`trae`、`trae-cn`、`warp`、`windsurf`、`workbuddy`、`zcode`、`zencoder`
 
 关键目录：
 
@@ -649,9 +649,9 @@ skill 目录结构与设计原则见 [docs/DESIGN.md](docs/DESIGN.md)。
 
 ## 支持的 Agent
 
-支持 49 个 agent，包括：
+支持 50 个 agent，包括：
 
-**Claude Code** · **Cursor** · **Windsurf** · **Codex** · **GitHub Copilot** · **Gemini CLI** · **OpenCode** · **Goose** · **Amp** · **Roo Code** · **Kiro CLI** · **Kilo Code** · **Trae** · **Cline** · **Antigravity** · **Droid** · **Augment** · **OpenClaw** · **CodeBuddy** · **Command Code** · **Crush** · **Kode** · **Mistral Vibe** · **MiMo** · **Mux** · **OpenClaude IDE** · **OpenHands** · **Qoder** · **Qwen Code** · **Replit** · **Trae CN** · **Neovate** · **AdaL** · **WorkBuddy AI**
+**Claude Code** · **Cursor** · **Windsurf** · **Codex** · **GitHub Copilot** · **Gemini CLI** · **OpenCode** · **Goose** · **Amp** · **Roo Code** · **Kiro CLI** · **Kilo Code** · **Trae** · **Cline** · **Antigravity** · **Droid** · **Augment** · **OpenClaw** · **CodeBuddy** · **Command Code** · **Crush** · **Kode** · **Mistral Vibe** · **MiMo** · **Mux** · **OpenClaude IDE** · **OpenHands** · **Qoder** · **Qwen Code** · **Replit** · **Trae CN** · **Neovate** · **AdaL** · **WorkBuddy AI** · **ZCode**
 
 <details>
 <summary>所有支持的 agent</summary>
@@ -706,6 +706,7 @@ skill 目录结构与设计原则见 [docs/DESIGN.md](docs/DESIGN.md)。
 | `warp` | `~/.warp/skills/` | `<project>/.warp/skills/` |
 | `windsurf` | `~/.codeium/windsurf/skills/` | `<project>/.codeium/windsurf/skills/` |
 | `workbuddy` | `~/.workbuddy-ai/skills/` | `<project>/.workbuddy-ai/skills/` |
+| `zcode` | `~/.zcode/skills/` | `<project>/.zcode/skills/` |
 | `zencoder` | `~/.zencoder/skills/` | `<project>/.zencoder/skills/` |
 
 </details>
