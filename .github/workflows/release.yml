@@ -36,7 +36,7 @@ jobs:
             exit 1
           fi
 
-      - run: npm run build
+      # verify runs lint, tests, and build; no standalone build step before it.
       - run: npm run verify
 
       - name: Extract changelog
