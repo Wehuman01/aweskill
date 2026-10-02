@@ -1,9 +1,9 @@
 name: review-pipeline-peng
 skills:
   - name: agentx
-    source: Webioinfo01/agentx-hub
+    source: wehuman01/agentx-hub
   - name: awescholar
-    source: Webioinfo01/awescholar
+    source: wehuman01/awescholar
   - name: brainstorming
     source: obra/superpowers
   - name: citation-management

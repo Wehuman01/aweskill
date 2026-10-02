@@ -4,6 +4,7 @@
 
 ### Features
 
+- Add `nature-skills` (19 skills + `nature-shared` from `Yuan1z0825/nature-skills`) and `review-pipeline-peng` (16-skill review-writing pipeline spanning 7 source repos) as bundle templates
 - Add `mimo` (MiMo) as a supported agent, reading skills from `~/.config/mimocode/skills/` globally and `<project>/.mimocode/skills/` per project; supported-agent counts in both READMEs move from 48 to 49
 
 ### DX
