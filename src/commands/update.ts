@@ -101,10 +101,14 @@ export function groupEntriesBySource(entries: SelectedSkillEntry[]): UpdateSourc
 
 /**
  * In check mode, when the remote tree SHA for the skill subpath differs from the
- * recorded one, we already know an update exists (or the skill drifted locally)
- * without cloning the source. Only safe when GitHub did not truncate the tree.
+ * recorded one, an update is provably available without cloning the source —
+ * but only if the local directory still matches the recorded baseline. When the
+ * baseline no longer matches, whether the skill has local changes or a stale
+ * baseline cannot be told apart without the remote content, so the skill falls
+ * through to the clone-and-compare path. Only safe when GitHub did not truncate
+ * the tree.
  */
-function canFastPathCheck(
+export function canFastPathCheck(
   options: UpdateOptions,
   remoteTreeTruncated: boolean,
   remoteTreeSha: string | undefined,
@@ -159,11 +163,13 @@ async function prepareUpdateGroup(
         continue;
       }
       const currentHash = await computeDirectoryHash(destination);
-      const reason = currentHash === item.entry.computedHash ? "update-available" : "local-changes-detected";
-      prepared.lines.push(...formatUpdateStatusLines(item.name, reason));
-      if (reason === "local-changes-detected") {
-        prepared.skipped.push(item.name);
+      if (currentHash === item.entry.computedHash) {
+        prepared.lines.push(...formatUpdateStatusLines(item.name, "update-available"));
+        continue;
       }
+      // Baseline drifted: local changes vs stale metadata is indistinguishable
+      // without the remote content, so verify by cloning instead of guessing.
+      entriesToClone.push(item);
       continue;
     }
 
@@ -321,6 +327,30 @@ async function processUpdateGroup(
         const currentHash = await computeDirectoryHash(destination);
         if (currentHash === remoteHash) {
           outcome.lines.push(...formatUpdateStatusLines(name, "up-to-date"));
+          // Content matches upstream, so any disagreement with the recorded
+          // baseline is stale metadata. Rewrite it, otherwise --check keeps
+          // reporting phantom local changes forever. Check mode heals too: it
+          // repairs tracking metadata, never the skill directory.
+          const remoteTreeSha = preparedGroup.remoteTreeShas.get(name);
+          if (
+            currentHash !== entry.computedHash ||
+            remoteTreeSha !== entry.remoteTreeSha ||
+            entry.resolvedRef !== preparedGroup.resolvedRef
+          ) {
+            outcome.lockUpserts.push({
+              name,
+              entry: {
+                source: entry.source,
+                sourceType: entry.sourceType,
+                sourceUrl: entry.sourceUrl,
+                ref: entry.ref,
+                resolvedRef: preparedGroup.resolvedRef,
+                subpath: remoteSkill.subpath,
+                computedHash: remoteHash,
+                remoteTreeSha,
+              },
+            });
+          }
           continue;
         }
         if (currentHash !== entry.computedHash && !options.override) {
