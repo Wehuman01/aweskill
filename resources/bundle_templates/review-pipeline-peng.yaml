@@ -1,0 +1,34 @@
+name: review-pipeline-peng
+skills:
+  - name: agentx
+    source: Webioinfo01/agentx-hub
+  - name: awescholar
+    source: Webioinfo01/awescholar
+  - name: brainstorming
+    source: obra/superpowers
+  - name: citation-management
+    source: K-Dense-AI/scientific-agent-skills
+  - name: docx
+    source: anthropics/skills
+  - name: figure-planner
+    source: Boom5426/Nature-Paper-Skills
+  - name: literature-review
+    source: K-Dense-AI/scientific-agent-skills
+  - name: manuscript-optimizer
+    source: Boom5426/Nature-Paper-Skills
+  - name: nature-figure
+    source: Yuan1z0825/nature-skills
+  - name: nature-paper-card
+    source: Yuan1z0825/nature-skills
+  - name: nature-ref-verifier
+    source: Yuan1z0825/nature-skills
+  - name: nature-reviewer
+    source: Yuan1z0825/nature-skills
+  - name: nature-writing
+    source: Yuan1z0825/nature-skills
+  - name: paper-lookup
+    source: K-Dense-AI/scientific-agent-skills
+  - name: scientific-writing
+    source: Boom5426/Nature-Paper-Skills
+  - name: submission-audit
+    source: Boom5426/Nature-Paper-Skills

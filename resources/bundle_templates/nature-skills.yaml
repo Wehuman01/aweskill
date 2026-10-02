@@ -1,0 +1,42 @@
+name: nature-skills
+skills:
+  - name: nature-academic-search
+    source: Yuan1z0825/nature-skills
+  - name: nature-citation
+    source: Yuan1z0825/nature-skills
+  - name: nature-data
+    source: Yuan1z0825/nature-skills
+  - name: nature-downloader
+    source: Yuan1z0825/nature-skills
+  - name: nature-experiment-log
+    source: Yuan1z0825/nature-skills
+  - name: nature-figure
+    source: Yuan1z0825/nature-skills
+  - name: nature-image2ppt
+    source: Yuan1z0825/nature-skills
+  - name: nature-literature-pipeline
+    source: Yuan1z0825/nature-skills
+  - name: nature-paper-card
+    source: Yuan1z0825/nature-skills
+  - name: nature-paper-to-patent
+    source: Yuan1z0825/nature-skills
+  - name: nature-paper2ppt
+    source: Yuan1z0825/nature-skills
+  - name: nature-polishing
+    source: Yuan1z0825/nature-skills
+  - name: nature-proposal-writer
+    source: Yuan1z0825/nature-skills
+  - name: nature-reader
+    source: Yuan1z0825/nature-skills
+  - name: nature-ref-verifier
+    source: Yuan1z0825/nature-skills
+  - name: nature-response
+    source: Yuan1z0825/nature-skills
+  - name: nature-reviewer
+    source: Yuan1z0825/nature-skills
+  - name: nature-shared
+    source: Yuan1z0825/nature-skills
+  - name: nature-statistics
+    source: Yuan1z0825/nature-skills
+  - name: nature-writing
+    source: Yuan1z0825/nature-skills
