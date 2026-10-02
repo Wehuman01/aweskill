@@ -6,10 +6,20 @@
 
 - Add `nature-skills` (19 skills + `nature-shared` from `Yuan1z0825/nature-skills`) and `review-pipeline-peng` (16-skill review-writing pipeline spanning 7 source repos) as bundle templates
 - Add `mimo` (MiMo) as a supported agent, reading skills from `~/.config/mimocode/skills/` globally and `<project>/.mimocode/skills/` per project; supported-agent counts in both READMEs move from 48 to 49
+- Add `zcode` (ZCode) as a supported agent, reading skills from `~/.zcode/skills/` globally and `<project>/.zcode/skills/` per project; supported-agent counts in both READMEs move from 49 to 50
+
+### Fixes
+
+- `update --check` no longer guesses "local changes" from a drifted lock baseline: when the baseline no longer matches, the skill falls through to a clone-and-compare so the verdict is proven against upstream content
+- `update` self-heals stale lock metadata: when local content already matches upstream, the recorded `computedHash`/`remoteTreeSha`/`resolvedRef` are rewritten instead of leaving `--check` reporting phantom local changes forever (this is what forced `install --override` as the only way out)
+- `bundle add` records the skill's tracked GitHub source from `skills-lock.json` instead of `null`, so hand-built bundles keep provenance for `bundle show` and `template install`
+- The collapsible all-agents lists in both READMEs lagged the registry (missing `mimo` and `workbuddy`); they now match the advertised counts
 
 ### DX
 
 - Bump `actions/checkout` to `v7`, `actions/setup-node` to `v7`, and `softprops/action-gh-release` to `v3` in both workflows, clearing the Node 20 runtime deprecation warning on every run
+- New template test guards bundle-template sources against non-canonical own-org casing (derived from `package.json`), preventing old-org spellings from sneaking back in
+- The release workflow drops its standalone `npm run build`; `verify` already builds
 
 ## v0.4.8 - 2026-09-13
 
